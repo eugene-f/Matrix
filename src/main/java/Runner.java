@@ -31,7 +31,6 @@ public class Runner {
 
 
         int[][] matrixC = new int[aI][bJ];
-
         for (int i = 0; i < matrixC.length; i++) {
             for (int j = 0; j < matrixC.length; j++) {
 //                matrixC[i][j] = matrixA[][] * matrixB[][];
