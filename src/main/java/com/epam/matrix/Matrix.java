@@ -4,44 +4,52 @@ import java.util.Random;
 
 public class Matrix {
 
-    int rows;
-    int collums;
-    int[][] values;
+    private int rows;
+    private int columns;
+    private int[][] values;
 
-    public Matrix(int rows, int collums) {
-        this.rows = rows;
-        this.collums = collums;
-        this.values = new int[rows][collums];
+    public Matrix(int rows, int columns) {
+        try {
+            this.rows = rows;
+            this.columns = columns;
+            this.values = new int[rows][columns];
+        } catch (NegativeArraySizeException e) {
+            System.out.println("ERROR: NegativeArraySizeException");
+        }
     }
 
-    public void init() {
+    public static Matrix multiply(Matrix matrixA, Matrix matrixB) {
+        Matrix matrixC = new Matrix(matrixA.rows, matrixB.columns);
+        if (matrixA.columns == matrixB.rows) {
+            for (int i = 0; i < matrixC.rows; i++) {
+                for (int j = 0; j < matrixC.columns; j++) {
+                    for (int k = 0; k < matrixA.columns; k++) {
+                        matrixC.values[i][j] += matrixA.values[i][k] * matrixB.values[k][j];
+                    }
+                }
+            }
+        } else {
+            System.out.println("ERROR: matrixA.columns != matrixB.rows");
+        }
+        return matrixC;
+    }
+
+    public void initRandom() {
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < collums; j++) {
-                this.values[i][j] = new Random().nextInt();
+            for (int j = 0; j < columns; j++) {
+                this.values[i][j] = new Random().nextInt(16) + new Random().nextInt(16);
             }
         }
     }
 
     public void print() {
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < collums; j++) {
-                System.out.println(values[i][j]);
+            for (int j = 0; j < columns; j++) {
+                System.out.format("%5d", values[i][j]);
             }
+            System.out.println();
         }
-    }
-
-    public Matrix multiplicate(Matrix matrixB) {
-        Matrix matrixC = new Matrix(this.rows, matrixB.collums);
-
-        for (int i = 0; i < this.rows; i++) {
-            for (int j = 0; j < matrixB.collums; j++) {
-                for (int k = 0; k < values.length; k++) {
-                    matrixC.values[i][j] = this.values[i][0] * matrixB.values[0][j];
-                }
-            }
-        }
-
-        return matrixC;
+        System.out.println();
     }
 
 }
