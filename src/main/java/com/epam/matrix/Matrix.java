@@ -78,7 +78,7 @@ public class Matrix {
         return matrixResult;
     }
 
-    public Matrix resize(int rows, int columns) {
+    public void resize(int rows, int columns) {
         Matrix matrixResult = new Matrix(rows, columns);
         int minRows = Math.min(mRows, rows);
         int minColumns = Math.min(mColumns, columns);
@@ -90,12 +90,11 @@ public class Matrix {
         mRows = rows;
         mColumns = columns;
         mValues = matrixResult.mValues;
-        return matrixResult;
     }
 
     public void printSize() {
-        System.out.println("mRows: " + getRows());
-        System.out.println("mColumns: " + getColumns());
+        System.out.println("rows: " + mRows);
+        System.out.println("columns: " + mColumns);
     }
 
     public void printValue() {
