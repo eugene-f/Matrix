@@ -94,8 +94,8 @@ public class Matrix {
     }
 
     public void printSize() {
-        System.out.println("mRows: " + getRows());
-        System.out.println("mColumns: " + getColumns());
+        System.out.println("rows: " + getRows());
+        System.out.println("columns: " + getColumns());
     }
 
     public void printValue() {
