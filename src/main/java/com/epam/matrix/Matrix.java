@@ -24,22 +24,6 @@ public class Matrix {
         this.values = v;
     }
 
-    public static Matrix multiply(Matrix matrixA, Matrix matrixB) {
-        Matrix matrixResult = new Matrix(matrixA.rows, matrixB.columns);
-        if (matrixA.columns == matrixB.rows) {
-            for (int i = 0; i < matrixResult.rows; i++) {
-                for (int j = 0; j < matrixResult.columns; j++) {
-                    for (int k = 0; k < matrixA.columns; k++) {
-                        matrixResult.values[i][j] += matrixA.values[i][k] * matrixB.values[k][j];
-                    }
-                }
-            }
-        } else {
-            System.out.println("ERROR: The matrices of this size can not be multiplied");
-        }
-        return matrixResult;
-    }
-
     private void create(int rows, int columns) {
         if (rows > 0 && columns > 0) {
             this.rows = rows;
@@ -62,10 +46,6 @@ public class Matrix {
         return valuesColumns;
     }
 
-    public Matrix multiply(Matrix matrix) {
-        return Matrix.multiply(this, matrix);
-    }
-
     public void fillZero() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -82,6 +62,26 @@ public class Matrix {
         }
     }
 
+    public Matrix multiply(Matrix matrix) {
+        return Matrix.multiply(this, matrix);
+    }
+
+    public static Matrix multiply(Matrix matrixA, Matrix matrixB) {
+        Matrix matrixResult = new Matrix(matrixA.rows, matrixB.columns);
+        if (matrixA.columns == matrixB.rows) {
+            for (int i = 0; i < matrixResult.rows; i++) {
+                for (int j = 0; j < matrixResult.columns; j++) {
+                    for (int k = 0; k < matrixA.columns; k++) {
+                        matrixResult.values[i][j] += matrixA.values[i][k] * matrixB.values[k][j];
+                    }
+                }
+            }
+        } else {
+            System.out.println("ERROR: The matrices of this size can not be multiplied");
+        }
+        return matrixResult;
+    }
+
     public Matrix resize(int rows, int columns) {
         Matrix matrixResult = new Matrix(rows, columns);
         int minRows = Math.min(this.rows, rows);
@@ -91,11 +91,9 @@ public class Matrix {
                 matrixResult.values[i][j] = values[i][j];
             }
         }
-
         this.rows = rows;
         this.columns = columns;
         values = matrixResult.values;
-
         return matrixResult;
     }
 
