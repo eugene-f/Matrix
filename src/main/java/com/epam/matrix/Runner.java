@@ -4,43 +4,49 @@ public class Runner {
 
     public static void main(String[] args) {
 
-//        Matrix matrixA = new Matrix(3, 4);
-        Matrix matrixA = new Matrix(3, 4, new int[][]{
-                {0, 7, 2, 7},
-                {3, 3, 6, 7},
-                {3, 4, 5, 4}
-        });
-        matrixA.initRandom();
-        System.out.println("Matrix A");
-        matrixA.print();
+        System.out.println("Matrix A - create (basic)");
+        Matrix matrixA = new Matrix(10, 10);
+        matrixA.printValue();
 
-//        Matrix matrixB = new Matrix(4, 5);
-        Matrix matrixB = new Matrix(4, 5, new int[][]{
-                {5, 4, 5, 5, 6},
-                {7, 4, 1, 3, 7},
-                {5, 7, 5, 4, 7},
-                {2, 3, 0, 3, 4}
-        });
-        matrixB.initRandom();
-        System.out.println("Matrix B");
-        matrixB.print();
+        System.out.println("Matrix A - init random");
+        matrixA.fillRandom(10);
+        matrixA.printValue();
 
+        System.out.println("Matrix A - resize (absolutely)");
+        matrixA.resize(3, 10);
+        matrixA.printValue();
+
+        System.out.println("Matrix A - resize (relatively)");
+        matrixA.resize(matrixA.getRows() + 4, matrixA.getColumns() - 3);
+        matrixA.printSize();
+        matrixA.printValue();
+
+        System.out.println("Matrix B - create (specified)");
+        Matrix matrixB = new Matrix(new int[][]{
+                {7, 4, 2},
+                {8, 6, 9, 1, 5},
+                {3, 4, 0, 2, 5, 9, 1},
+                {5, 7, 2, 3, 0},
+                {3, 3, 3}
+        });
+        matrixB.printValue();
+        matrixB.printSize();
+
+        System.out.println("Matrix C - multiply (static)");
         Matrix matrixC = Matrix.multiply(matrixA, matrixB);
-        System.out.println("Matrix C");
-        matrixC.print();
+        matrixC.printValue();
 
-        matrixC.resize(matrixC.getRows() - 3, matrixC.getColumns() - 3).print();
+        System.out.println("Matrix C - multiply (non-static)");
+        matrixC = matrixA.multiply(matrixB);
+        matrixC.printValue();
 
-        Matrix matrixT = new Matrix(new int[][]{
-                {5, 4, 5, 6},
-                {7, 4, 1, 3, 7},
-                {5, 7, 5, 4, 7},
-                {2, 3, 0, 3, 4}
-        });
-        System.out.println("Matrix T");
-        matrixT.print();
-        System.out.println("rows: " + matrixT.getRows());
-        System.out.println("columns: " + matrixT.getColumns());
+        System.out.println("Matrix C - print size");
+        matrixC.printSize();
+        System.out.println();
+
+        System.out.println("Matrix C - init zero");
+        matrixC.fillZero();
+        matrixC.printValue();
 
     }
 }
