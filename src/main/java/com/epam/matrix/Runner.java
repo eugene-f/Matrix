@@ -5,19 +5,22 @@ public class Runner {
     public static void main(String[] args) {
 
         System.out.println("Matrix A - create (basic)");
-        Matrix matrixA = new Matrix(10, 10);
+        Matrix matrixA = new Matrix(5, 10);
+        matrixA.printSize();
         matrixA.printValue();
 
-        System.out.println("Matrix A - init random");
+        System.out.println("Matrix A - fill random");
         matrixA.fillRandom(10);
-        matrixA.printValue();
-
-        System.out.println("Matrix A - resize (absolutely)");
-        matrixA.resize(3, 10);
+        matrixA.printSize();
         matrixA.printValue();
 
         System.out.println("Matrix A - resize (relatively)");
-        matrixA.resize(matrixA.getRows() + 4, matrixA.getColumns() - 3);
+        matrixA.resize(matrixA.getRows() + 2, matrixA.getColumns() - 3);
+        matrixA.printSize();
+        matrixA.printValue();
+
+        System.out.println("Matrix A - resize (absolutely)");
+        matrixA.resize(7, 5);
         matrixA.printSize();
         matrixA.printValue();
 
@@ -29,23 +32,26 @@ public class Runner {
                 {5, 7, 2, 3, 0},
                 {3, 3, 3}
         });
-        matrixB.printValue();
         matrixB.printSize();
+        matrixB.printValue();
 
         System.out.println("Matrix C - multiply (static)");
         Matrix matrixC = Matrix.multiply(matrixA, matrixB);
+        matrixC.printSize();
         matrixC.printValue();
 
         System.out.println("Matrix C - multiply (non-static)");
         matrixC = matrixA.multiply(matrixB);
+        matrixC.printSize();
         matrixC.printValue();
 
         System.out.println("Matrix C - print size");
         matrixC.printSize();
         System.out.println();
 
-        System.out.println("Matrix C - init zero");
+        System.out.println("Matrix C - fill zero");
         matrixC.fillZero();
+        matrixC.printSize();
         matrixC.printValue();
 
     }

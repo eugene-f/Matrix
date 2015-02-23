@@ -4,34 +4,30 @@ import java.util.Random;
 
 public class Matrix {
 
-    private int rows;
-    private int columns;
-    private int[][] values;
+    private int mRows;
+    private int mColumns;
+    private int[][] mValues;
 
     public Matrix(int rows, int columns) {
-        create(rows, columns);
+        if (rows > 0 && columns > 0) {
+            mRows = rows;
+            mColumns = columns;
+            mValues = new int[rows][columns];
+        } else {
+            System.out.println("ERROR: The dimension of the matrix can not be a negative number or zero");
+        }
     }
 
     public Matrix(int[][] values) {
-        rows = valuesGetRows(values);
-        columns = valuesGetColumns(values);
-        int[][] v = new int[rows][columns];
-        for (int i = 0; i < rows; i++) {
+        mRows = valuesGetRows(values);
+        mColumns = valuesGetColumns(values);
+        int[][] v = new int[mRows][mColumns];
+        for (int i = 0; i < mRows; i++) {
             for (int j = 0; j < values[i].length; j++) {
                 v[i][j] = values[i][j];
             }
         }
-        this.values = v;
-    }
-
-    private void create(int rows, int columns) {
-        if (rows > 0 && columns > 0) {
-            this.rows = rows;
-            this.columns = columns;
-            this.values = new int[rows][columns];
-        } else {
-            System.out.println("ERROR: The dimension of the matrix can not be a negative number or zero");
-        }
+        mValues = v;
     }
 
     private int valuesGetRows(int[][] values) {
@@ -47,17 +43,17 @@ public class Matrix {
     }
 
     public void fillZero() {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                this.values[i][j] = 0;
+        for (int i = 0; i < mRows; i++) {
+            for (int j = 0; j < mColumns; j++) {
+                mValues[i][j] = 0;
             }
         }
     }
 
     public void fillRandom(int bound) {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                this.values[i][j] = new Random().nextInt(bound);
+        for (int i = 0; i < mRows; i++) {
+            for (int j = 0; j < mColumns; j++) {
+                mValues[i][j] = new Random().nextInt(bound);
             }
         }
     }
@@ -67,12 +63,12 @@ public class Matrix {
     }
 
     public static Matrix multiply(Matrix matrixA, Matrix matrixB) {
-        Matrix matrixResult = new Matrix(matrixA.rows, matrixB.columns);
-        if (matrixA.columns == matrixB.rows) {
-            for (int i = 0; i < matrixResult.rows; i++) {
-                for (int j = 0; j < matrixResult.columns; j++) {
-                    for (int k = 0; k < matrixA.columns; k++) {
-                        matrixResult.values[i][j] += matrixA.values[i][k] * matrixB.values[k][j];
+        Matrix matrixResult = new Matrix(matrixA.mRows, matrixB.mColumns);
+        if (matrixA.mColumns == matrixB.mRows) {
+            for (int i = 0; i < matrixResult.mRows; i++) {
+                for (int j = 0; j < matrixResult.mColumns; j++) {
+                    for (int k = 0; k < matrixA.mColumns; k++) {
+                        matrixResult.mValues[i][j] += matrixA.mValues[i][k] * matrixB.mValues[k][j];
                     }
                 }
             }
@@ -84,28 +80,28 @@ public class Matrix {
 
     public Matrix resize(int rows, int columns) {
         Matrix matrixResult = new Matrix(rows, columns);
-        int minRows = Math.min(this.rows, rows);
-        int minColumns = Math.min(this.columns, columns);
+        int minRows = Math.min(mRows, rows);
+        int minColumns = Math.min(mColumns, columns);
         for (int i = 0; i < minRows; i++) {
             for (int j = 0; j < minColumns; j++) {
-                matrixResult.values[i][j] = values[i][j];
+                matrixResult.mValues[i][j] = mValues[i][j];
             }
         }
-        this.rows = rows;
-        this.columns = columns;
-        values = matrixResult.values;
+        mRows = rows;
+        mColumns = columns;
+        mValues = matrixResult.mValues;
         return matrixResult;
     }
 
     public void printSize() {
-        System.out.println("rows: " + getRows());
-        System.out.println("columns: " + getColumns());
+        System.out.println("mRows: " + getRows());
+        System.out.println("mColumns: " + getColumns());
     }
 
     public void printValue() {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                System.out.format("%5d", values[i][j]);
+        for (int i = 0; i < mRows; i++) {
+            for (int j = 0; j < mColumns; j++) {
+                System.out.format("%5d", mValues[i][j]);
             }
             System.out.println();
         }
@@ -113,11 +109,11 @@ public class Matrix {
     }
 
     public int getRows() {
-        return rows;
+        return mRows;
     }
 
     public int getColumns() {
-        return columns;
+        return mColumns;
     }
 
 }
