@@ -93,27 +93,20 @@ public class Matrix {
         matrixValues = values;
     }
 
-    public void printSize() {
-        System.out.println("rows: " + matrixRows);
-        System.out.println("columns: " + matrixColumns);
-    }
-
-    public void printValue() {
-        for (int i = 0; i < matrixRows; i++) {
-            for (int j = 0; j < matrixColumns; j++) {
-                System.out.format("%5d", matrixValues[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
     public int getMatrixRows() {
         return matrixRows;
     }
 
     public int getMatrixColumns() {
         return matrixColumns;
+    }
+
+    public int[][] getMatrixValues() {
+        return matrixValues;
+    }
+
+    public int getMatrixValue(int i, int j) {
+        return matrixValues[i][j];
     }
 
 }
