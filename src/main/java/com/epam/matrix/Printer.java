@@ -10,7 +10,7 @@ public class Printer {
     public static void printValue(Matrix matrix) {
         for (int i = 0; i < matrix.getMatrixRows(); i++) {
             for (int j = 0; j < matrix.getMatrixColumns(); j++) {
-                System.out.format("%5d", matrix.getMatrixValue(i, j));
+                System.out.format("%5d", matrix.getMatrixCellValue(i, j));
             }
             System.out.println();
         }

@@ -105,7 +105,7 @@ public class Matrix {
         return matrixValues;
     }
 
-    public int getMatrixValue(int i, int j) {
+    public int getMatrixCellValue(int i, int j) {
         return matrixValues[i][j];
     }
 
