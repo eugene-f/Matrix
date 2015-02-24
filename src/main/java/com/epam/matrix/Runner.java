@@ -15,7 +15,7 @@ public class Runner {
         matrixA.printValue();
 
         System.out.println("Matrix A - resize (relatively)");
-        matrixA.resize(matrixA.getRows() + 2, matrixA.getColumns() - 3);
+        matrixA.resize(matrixA.getMatrixRows() + 2, matrixA.getMatrixColumns() - 3);
         matrixA.printSize();
         matrixA.printValue();
 
