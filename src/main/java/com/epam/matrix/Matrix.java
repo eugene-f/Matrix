@@ -10,8 +10,7 @@ public class Matrix {
 
     public Matrix(int rows, int columns) {
         if (rows <= 0 || columns <= 0) {
-            System.out.println("ERROR: The dimension of the matrix can not be a negative number or zero");
-            // TODO: throw Exception
+            throw new RuntimeException("The dimension of the matrix can not be a negative number or zero");
         } else {
             matrixRows = rows;
             matrixColumns = columns;
