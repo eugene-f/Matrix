@@ -64,7 +64,9 @@ public class Matrix {
 
     public static Matrix multiply(Matrix matrixA, Matrix matrixB) {
         Matrix matrixResult = new Matrix(matrixA.matrixRows, matrixB.matrixColumns);
-        if (matrixA.matrixColumns == matrixB.matrixRows) {
+        if (matrixA.matrixColumns != matrixB.matrixRows) {
+            throw new RuntimeException("The matrices of this size can not be multiplied");
+        } else {
             for (int i = 0; i < matrixResult.matrixRows; i++) {
                 for (int j = 0; j < matrixResult.matrixColumns; j++) {
                     for (int k = 0; k < matrixA.matrixColumns; k++) {
@@ -72,8 +74,6 @@ public class Matrix {
                     }
                 }
             }
-        } else {
-            System.out.println("ERROR: The matrices of this size can not be multiplied");
         }
         return matrixResult;
     }
